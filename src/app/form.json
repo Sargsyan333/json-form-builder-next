@@ -1,0 +1,31 @@
+[
+  {
+    "label": "Email",
+    "name": "email",
+    "type": "text",
+    "validation": "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$",
+    "value": "area@example.com"
+  },
+  {
+    "label": "Age",
+    "name": "age",
+    "type": "number",
+    "min_value": 18,
+    "max_value": 99,
+    "value": 22
+  },
+  {
+    "label": "Gender",
+    "name": "gender",
+    "type": "dropdown",
+    "default_value": "female",
+    "options": ["male", "female"]
+  },
+  {
+    "label": "Bio",
+    "name": "bio",
+    "type": "longtext",
+    "value": "Its a secret",
+    "validation": "^([a-zA-Z0-9_-\\s]){1,40}$"
+  }
+]
