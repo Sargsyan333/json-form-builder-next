@@ -42,7 +42,7 @@ const TextAreaInput = ({data, onInputStateChange, resetForm}: Props) => {
             </label>
             <textarea
                 name={data.name}
-                rows="4"
+                rows={4}
                 className={`block p-2.5 w-full text-sm rounded-lg border ${error ? 'text-red-900 bg-red-50 border-red-300 focus:ring-red-500 focus:border-red-500': 'text-gray-900 bg-gray-50 border-gray-300 focus:ring-blue-500 focus:border-blue-500'}`}
                 placeholder="Write your thoughts here..."
                 onChange={onTextChange}

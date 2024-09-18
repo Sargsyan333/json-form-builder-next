@@ -14,7 +14,7 @@ const DropdownInput = ({data, onInputStateChange, resetForm}: Props) => {
         if (resetForm) {
             setFieldValue(data.default_value as string);
         }
-    }, [resetForm]);
+    }, [resetForm, data.default_value]);
 
     const onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setFieldValue(event.target.value);
@@ -30,7 +30,7 @@ const DropdownInput = ({data, onInputStateChange, resetForm}: Props) => {
                 {data.options?.map((option) => {
                     return (
                         <option key={option} value={option}>
-                            {option.toUpperCase()}
+                            {option}
                         </option>
                     )
                 })}

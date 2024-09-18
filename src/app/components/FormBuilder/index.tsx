@@ -14,17 +14,25 @@ type Props = {
 
 type FormStateProps = {
     errors: Record<string, boolean>;
-    values: Record<string, string | number>;
+    values: Record<string, string | number | undefined>;
 }
 
-const FormBuilder = ({formData}: React.FC<Props>) => {
+const FormBuilder = ({formData}: Props) => {
     const initialFormState = useMemo(() => {
-        const initialState = {
+        let initialState: FormStateProps = {
             errors: {},
-            values: {}
+            values: {},
         };
-        for (let formItem of formData) {
-            initialState.values[formItem.name] = formItem.value || formItem.default_value;
+        let initialValue: string | number | undefined;
+        for (const formItem of formData) {
+            initialValue = formItem.value || formItem.default_value;
+            initialState = {
+                ...initialState,
+                values: {
+                    ...initialState.values,
+                    [formItem.name]: initialValue,
+                }
+            }
         }
 
         return initialState;
@@ -35,17 +43,6 @@ const FormBuilder = ({formData}: React.FC<Props>) => {
     const [resetForm, setResetForm] = useState<boolean>(false);
 
     const [isModalOpen, setModalOpen] = useState<boolean>(false);
-
-    useEffect(() => {
-        const initialFormState = {
-            errors: {},
-            values: {}
-        };
-        for (let formItem of formData) {
-            initialFormState.values[formItem.name] = formItem.value || formItem.default_value;
-        }
-        setFormState(initialFormState);
-    }, []);
 
     useEffect(() => {
         setIsFormDisabled(
@@ -132,7 +129,7 @@ const FormBuilder = ({formData}: React.FC<Props>) => {
                     return <React.Fragment key={`form-item-${index}`}></React.Fragment>;
             }
         })
-    }, [formState, resetForm])
+    }, [resetForm])
 
     return (
         <React.Fragment>
